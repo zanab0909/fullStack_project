@@ -1,0 +1,1713 @@
+/* ========================= Profile — Beauty Closet ========================= */
+
+.closet-page {
+  --closet-card-radius: 24px;
+  --closet-shadow: 0 10px 30px rgba(95, 81, 60, 0.1);
+  --closet-shadow-hover: 0 18px 40px rgba(95, 81, 60, 0.16);
+  --closet-serif: Georgia, "Times New Roman", serif;
+  position: relative;
+  width: 100%;
+  max-width: 1120px;
+  margin-inline: auto;
+  padding: clamp(20px, 4vw, 44px) clamp(16px, 4vw, 32px) 72px;
+}
+
+.closet-page::before {
+  content: "";
+  position: absolute;
+  top: 8%;
+  inset-inline-end: -8%;
+  width: min(420px, 55vw);
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(220, 201, 167, 0.28), transparent 68%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* ========================= Hero — Beauty Passport ========================= */
+
+.closet-hero {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  gap: 0;
+  overflow: hidden;
+  border-radius: 28px;
+  padding: clamp(18px, 3vw, 28px) clamp(18px, 3.2vw, 36px) 18px;
+  background: linear-gradient(145deg, #4d3d26 0%, #7a6542 55%, #a58a5c 100%);
+  color: #fff;
+  box-shadow: 0 24px 50px rgba(81, 65, 39, 0.28);
+  animation: closetFadeUp 0.55s ease both;
+}
+
+.closet-hero-backdrop {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+}
+
+.closet-hero-circle {
+  position: absolute;
+  width: min(340px, 48vw);
+  aspect-ratio: 1;
+  top: -18%;
+  inset-inline-start: 4%;
+  border-radius: 50%;
+  border: 1px solid rgba(237, 226, 204, 0.22);
+  background: radial-gradient(circle, rgba(237, 226, 204, 0.12), transparent 72%);
+}
+
+.closet-hero-watermark {
+  position: absolute;
+  bottom: -0.12em;
+  inset-inline-end: 0.02em;
+  font-family: var(--closet-serif);
+  font-size: clamp(12rem, 28vw, 20rem);
+  font-weight: 700;
+  line-height: 0.72;
+  color: rgba(255, 255, 255, 0.07);
+  user-select: none;
+}
+
+.closet-crop {
+  position: absolute;
+  width: 18px;
+  height: 18px;
+  border: 0 solid rgba(255, 255, 255, 0.35);
+}
+
+.closet-crop-tl {
+  top: 10px;
+  inset-inline-start: 10px;
+  border-block-start-width: 1px;
+  border-inline-start-width: 1px;
+}
+
+.closet-crop-tr {
+  top: 10px;
+  inset-inline-end: 10px;
+  border-block-start-width: 1px;
+  border-inline-end-width: 1px;
+}
+
+.closet-crop-bl {
+  bottom: 10px;
+  inset-inline-start: 10px;
+  border-block-end-width: 1px;
+  border-inline-start-width: 1px;
+}
+
+.closet-crop-br {
+  bottom: 10px;
+  inset-inline-end: 10px;
+  border-block-end-width: 1px;
+  border-inline-end-width: 1px;
+}
+
+.closet-hero-side {
+  position: absolute;
+  inset-inline-end: 14px;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 2;
+  writing-mode: vertical-rl;
+  font-family: var(--closet-serif);
+  font-size: 0.62rem;
+  letter-spacing: 0.42em;
+  color: rgba(255, 255, 255, 0.38);
+}
+
+.closet-hero-topline {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 10px 14px;
+  padding-bottom: 12px;
+  padding-inline-start: clamp(200px, 30vw, 340px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.18);
+  letter-spacing: 0.16em;
+  font-size: 0.7rem;
+}
+
+.closet-hero-emblem {
+  font-size: 0.95rem;
+  color: var(--champagne-veil);
+}
+
+.closet-hero-brand {
+  font-family: var(--closet-serif);
+  font-weight: 700;
+}
+
+.closet-hero-edition {
+  margin-inline-start: auto;
+  letter-spacing: 0;
+  color: rgba(255, 255, 255, 0.82);
+  font-size: 0.78rem;
+}
+
+.closet-hero-since {
+  font-family: var(--closet-serif);
+  font-size: 0.62rem;
+  letter-spacing: 0.18em;
+  color: rgba(255, 255, 255, 0.55);
+}
+
+.closet-hero-main {
+  position: relative;
+  z-index: 5;
+  min-height: clamp(210px, 24vw, 250px);
+  padding: clamp(14px, 2.4vw, 22px) 0 8px;
+}
+
+.closet-hero-title {
+  position: relative;
+  z-index: 6;
+  min-width: 0;
+  padding-inline-start: clamp(200px, 30vw, 340px);
+}
+
+.closet-hero-id {
+  margin: 0 0 8px;
+  font-size: 0.68rem;
+  letter-spacing: 0.14em;
+  color: rgba(255, 255, 255, 0.62);
+}
+
+.closet-hero-badge {
+  display: inline-block;
+  margin-bottom: 10px;
+  padding: 4px 12px;
+  border: 1px solid rgba(237, 226, 204, 0.55);
+  border-radius: 999px;
+  font-family: var(--closet-serif);
+  font-size: 0.62rem;
+  letter-spacing: 0.22em;
+  color: var(--champagne-veil);
+  background: rgba(255, 255, 255, 0.06);
+  transition: transform 0.35s ease;
+}
+
+.closet-hero:hover .closet-hero-badge {
+  transform: translateY(-3px);
+}
+
+.closet-name-frame {
+  position: relative;
+  width: fit-content;
+  max-width: 100%;
+  padding: 8px 16px 10px;
+  margin-inline-start: clamp(-24px, -2vw, 0);
+}
+
+.closet-name-frame::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border: 1px solid rgba(237, 226, 204, 0.38);
+  pointer-events: none;
+}
+
+.closet-name-frame::after {
+  content: "";
+  position: absolute;
+  inset: 5px;
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  pointer-events: none;
+}
+
+.closet-hero-name {
+  margin: 0;
+  font-size: clamp(1.9rem, 5.4vw, 3.4rem);
+  font-weight: 900;
+  line-height: 1.2;
+  overflow-wrap: anywhere;
+  transition: transform 0.35s ease;
+}
+
+.closet-hero:hover .closet-hero-name {
+  transform: translateX(6px);
+}
+
+.closet-hero-tagline {
+  margin: 8px 0 14px;
+  font-family: var(--closet-serif);
+  font-style: italic;
+  font-size: clamp(0.95rem, 2vw, 1.2rem);
+  color: var(--champagne-veil);
+}
+
+.closet-hero-details {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 20px;
+  margin: 0 0 14px;
+  padding: 0;
+}
+
+.closet-hero-details > div {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+}
+
+.closet-hero-details dt {
+  font-size: 0.64rem;
+  color: rgba(255, 255, 255, 0.58);
+}
+
+.closet-hero-details dd {
+  margin: 0;
+  font-size: 0.82rem;
+  font-weight: 700;
+  overflow-wrap: anywhere;
+}
+
+.closet-hero-edit {
+  opacity: 0.35;
+  transform: translateY(4px);
+  padding: 7px 16px;
+  border: 1px solid rgba(237, 226, 204, 0.45);
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.08);
+  color: #fff;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  cursor: pointer;
+  transition: opacity 0.3s ease, transform 0.3s ease, background 0.3s ease;
+}
+
+.closet-hero:hover .closet-hero-edit,
+.closet-hero-edit:focus-visible {
+  opacity: 1;
+  transform: translateY(0);
+  background: rgba(255, 255, 255, 0.16);
+}
+
+/* --- Portrait --- */
+
+.closet-portrait-cluster {
+  position: absolute;
+  top: clamp(52px, 8vw, 72px);
+  inset-inline-start: clamp(22px, 4vw, 48px);
+  z-index: 4;
+  width: clamp(148px, 18vw, 210px);
+}
+
+.closet-portrait-halo {
+  position: absolute;
+  inset: -28px -36px -18px -18px;
+  z-index: 0;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(237, 226, 204, 0.22), transparent 70%);
+  pointer-events: none;
+}
+
+.closet-portrait-behind {
+  position: absolute;
+  inset-inline-end: -8px;
+  bottom: 18%;
+  z-index: 0;
+  writing-mode: vertical-rl;
+  font-family: var(--closet-serif);
+  font-size: 0.58rem;
+  letter-spacing: 0.28em;
+  color: rgba(255, 255, 255, 0.28);
+}
+
+.closet-portrait {
+  position: relative;
+  z-index: 2;
+  overflow: hidden;
+  width: 100%;
+  aspect-ratio: 0.78;
+  display: grid;
+  place-items: center;
+  border-radius: 999px 999px 28px 28px;
+  background: linear-gradient(150deg, #dcc9a7, #8a724c);
+  box-shadow:
+    inset 0 0 0 3px rgba(255, 255, 255, 0.35),
+    0 16px 32px rgba(43, 33, 18, 0.38);
+  transition: transform 0.35s ease;
+}
+
+.closet-hero:hover .closet-portrait {
+  transform: translateY(-4px) scale(1.03);
+}
+
+.closet-portrait-photo {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.closet-portrait-letter {
+  font-family: var(--closet-serif);
+  font-size: 4rem;
+  font-weight: 700;
+  color: #fff;
+}
+
+.closet-portrait-view {
+  position: absolute;
+  inset: auto 0 0;
+  display: grid;
+  place-items: center;
+  padding: 10px 8px 14px;
+  background: linear-gradient(transparent, rgba(43, 33, 18, 0.72));
+  font-family: var(--closet-serif);
+  font-size: 0.68rem;
+  letter-spacing: 0.16em;
+  color: #fff;
+  opacity: 0;
+  transform: translateY(8px);
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.closet-portrait:hover .closet-portrait-view,
+.closet-hero:hover .closet-portrait-view {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* --- Passport + stats inside the card --- */
+
+.closet-passport-strip {
+  position: relative;
+  z-index: 3;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 10px 18px;
+  margin: 4px 0 12px;
+  padding: 12px 4px 14px;
+  border-top: 1px solid rgba(255, 255, 255, 0.16);
+}
+
+.closet-passport-kicker {
+  margin: 0;
+  font-family: var(--closet-serif);
+  font-size: 0.72rem;
+  letter-spacing: 0.18em;
+  color: rgba(255, 255, 255, 0.78);
+}
+
+.closet-passport-kicker span {
+  margin-inline-start: 8px;
+  letter-spacing: 0.08em;
+  color: rgba(255, 255, 255, 0.5);
+}
+
+.closet-passport-metrics {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 22px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.closet-passport-metrics li {
+  display: grid;
+  gap: 2px;
+}
+
+.closet-passport-metrics strong {
+  font-family: var(--closet-serif);
+  font-size: 1.15rem;
+  line-height: 1;
+  color: var(--champagne-veil);
+}
+
+.closet-passport-metrics span {
+  font-size: 0.58rem;
+  letter-spacing: 0.12em;
+  color: rgba(255, 255, 255, 0.55);
+}
+
+.closet-stats {
+  position: relative;
+  z-index: 3;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 10px;
+}
+
+.closet-stat {
+  display: grid;
+  justify-items: start;
+  gap: 2px;
+  padding: 12px 14px 14px;
+  background: rgba(247, 243, 232, 0.16);
+  border: 0;
+  border-radius: 16px;
+  box-shadow: none;
+  animation: closetFadeUp 0.45s ease both;
+}
+
+.closet-stat:nth-child(1) { animation-delay: 0.08s; }
+.closet-stat:nth-child(2) { animation-delay: 0.16s; }
+.closet-stat:nth-child(3) { animation-delay: 0.24s; }
+.closet-stat:nth-child(4) { animation-delay: 0.32s; }
+
+.closet-stat:hover {
+  transform: none;
+  box-shadow: none;
+  background: rgba(247, 243, 232, 0.24);
+}
+
+.closet-stat-icon {
+  font-size: 0.72rem;
+  line-height: 1;
+  color: var(--champagne-veil);
+  opacity: 0.85;
+}
+
+.closet-stat-number {
+  font-family: var(--closet-serif);
+  font-size: 1.85rem;
+  font-weight: 700;
+  color: #fff;
+  line-height: 1;
+}
+
+.closet-stat-label {
+  font-size: 0.68rem;
+  color: rgba(255, 255, 255, 0.62);
+}
+
+.closet-stat-city-name {
+  font-family: var(--closet-serif);
+  font-size: 1.45rem;
+  font-weight: 700;
+  color: #fff;
+  line-height: 1.1;
+}
+
+
+.closet-section {
+  position: relative;
+  z-index: 1;
+  margin-top: clamp(40px, 6vw, 64px);
+}
+
+.closet-section-heading {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 22px;
+  animation: closetFadeUp 0.45s ease both;
+}
+
+.closet-section-index {
+  font-family: var(--closet-serif);
+  font-size: clamp(2.2rem, 5vw, 3.2rem);
+  font-weight: 700;
+  color: var(--silken-dune);
+  line-height: 1;
+}
+
+.closet-section-heading h2 {
+  display: grid;
+  gap: 2px;
+  margin: 0;
+}
+
+.closet-section-en {
+  font-family: var(--closet-serif);
+  font-size: clamp(1.5rem, 3.6vw, 2.2rem);
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  color: var(--dark-text);
+  line-height: 1.05;
+}
+
+.closet-section-ar {
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--golden-sandstone);
+  letter-spacing: 0.05em;
+}
+
+.closet-section-rule {
+  flex: 1;
+  min-width: 40px;
+  height: 1px;
+  background: linear-gradient(to left, var(--silken-dune), transparent);
+}
+
+/* ========================= Bento tiles ========================= */
+
+.closet-bento {
+  display: grid;
+  gap: 16px;
+}
+
+.closet-bento-style {
+  grid-template-columns: 1.55fr 1fr;
+  grid-template-areas:
+    "info style"
+    "info settings";
+}
+
+.closet-bento-appts {
+  grid-template-columns: 1fr 1.5fr;
+}
+
+.closet-tile {
+  padding: clamp(18px, 2.6vw, 26px);
+  background: var(--white);
+  border: 1px solid var(--silken-dune);
+  border-radius: var(--closet-card-radius);
+  box-shadow: var(--closet-shadow);
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+  animation: closetFadeUp 0.45s ease both;
+}
+
+.closet-tile:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--closet-shadow-hover);
+}
+
+.closet-bento .closet-tile:nth-child(2) {
+  animation-delay: 0.08s;
+}
+
+.closet-bento .closet-tile:nth-child(3) {
+  animation-delay: 0.16s;
+}
+
+.closet-tile-info {
+  grid-area: info;
+}
+
+.closet-tile-style {
+  grid-area: style;
+}
+
+.closet-tile-settings {
+  grid-area: settings;
+}
+
+.closet-tile-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+.closet-tile-head h3 {
+  margin: 0;
+  font-size: 1.05rem;
+  font-weight: 800;
+  color: var(--dark-text);
+}
+
+.closet-tile-count {
+  min-width: 34px;
+  height: 34px;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  background: var(--champagne-veil);
+  color: var(--golden-sandstone);
+  font-family: var(--closet-serif);
+  font-weight: 700;
+}
+
+/* ========================= Personal info ========================= */
+
+.closet-edit-btn {
+  padding: 6px 18px;
+  border: 1px solid var(--golden-sandstone);
+  border-radius: 999px;
+  background: transparent;
+  color: var(--golden-sandstone);
+  font-size: 0.8rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background 0.25s ease, color 0.25s ease, transform 0.25s ease;
+}
+
+.closet-edit-btn:hover {
+  background: var(--golden-sandstone);
+  color: #fff;
+  transform: translateY(-2px);
+}
+
+.closet-info-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 14px 18px;
+  margin: 0;
+}
+
+.closet-info-item {
+  display: grid;
+  gap: 4px;
+  padding: 14px 16px;
+  background: var(--ivory-whisper);
+  border: 1px solid var(--silken-dune);
+  border-radius: 16px;
+  transition: transform 0.25s ease, border-color 0.25s ease;
+}
+
+.closet-info-item:hover {
+  transform: translateY(-2px);
+  border-color: var(--amber-tresses);
+}
+
+.closet-info-item dt {
+  font-size: 0.68rem;
+  font-weight: 700;
+  color: var(--golden-sandstone);
+  letter-spacing: 0.08em;
+}
+
+.closet-info-item dd {
+  margin: 0;
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--dark-text);
+  overflow-wrap: anywhere;
+}
+
+/* ========================= Forms ========================= */
+
+.closet-edit-form,
+.closet-form {
+  display: grid;
+  gap: 14px;
+}
+
+.closet-field {
+  display: grid;
+  gap: 6px;
+}
+
+.closet-field > span {
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: var(--dark-text);
+  opacity: 0.8;
+}
+
+.closet-field input,
+.closet-field select {
+  font: inherit;
+  width: 100%;
+  padding: 11px 14px;
+  border: 1px solid var(--silken-dune);
+  border-radius: 12px;
+  background: var(--white);
+  color: var(--dark-text);
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.closet-field input:focus,
+.closet-field select:focus {
+  outline: none;
+  border-color: var(--amber-tresses);
+  box-shadow: 0 0 0 3px rgba(185, 150, 104, 0.18);
+}
+
+.closet-field select:disabled {
+  background: var(--ivory-whisper);
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+
+.closet-field-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+.closet-form-actions {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin-top: 4px;
+}
+
+.closet-primary-btn {
+  position: relative;
+  padding: 11px 26px;
+  border: none;
+  border-radius: 999px;
+  background: var(--golden-sandstone);
+  color: #fff;
+  font-size: 0.9rem;
+  font-weight: 800;
+  cursor: pointer;
+  transition: background 0.25s ease, transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.closet-primary-btn:hover {
+  background: var(--amber-tresses);
+  transform: translateY(-2px);
+  box-shadow: 0 10px 22px rgba(138, 114, 76, 0.3);
+}
+
+.closet-ghost-btn {
+  padding: 10px 22px;
+  border: 1px solid var(--silken-dune);
+  border-radius: 999px;
+  background: var(--white);
+  color: var(--dark-text);
+  font-size: 0.88rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background 0.25s ease, transform 0.25s ease;
+}
+
+.closet-ghost-btn:hover {
+  background: var(--champagne-veil);
+  transform: translateY(-2px);
+}
+
+.closet-form-error {
+  margin: 0;
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: #a2613c;
+}
+
+/* ========================= Style tile ========================= */
+
+.closet-tile-note {
+  margin: 0 0 14px;
+  font-size: 0.8rem;
+  color: var(--dark-text);
+  opacity: 0.7;
+}
+
+.closet-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.closet-chip {
+  padding: 7px 16px;
+  border: 1px solid var(--silken-dune);
+  border-radius: 999px;
+  background: var(--champagne-veil);
+  color: var(--golden-sandstone);
+  font-size: 0.8rem;
+  font-weight: 700;
+  animation: closetFadeUp 0.35s ease both;
+  transition: transform 0.25s ease, background 0.25s ease;
+}
+
+.closet-chip:hover {
+  transform: translateY(-2px);
+  background: var(--silken-dune);
+}
+
+.closet-chips .closet-chip:nth-child(2) {
+  animation-delay: 0.06s;
+}
+
+.closet-chips .closet-chip:nth-child(3) {
+  animation-delay: 0.12s;
+}
+
+.closet-chips .closet-chip:nth-child(n + 4) {
+  animation-delay: 0.18s;
+}
+
+.closet-muted {
+  margin: 0;
+  font-size: 0.85rem;
+  color: var(--dark-text);
+  opacity: 0.65;
+}
+
+.closet-style-foot {
+  margin: 16px 0 0;
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: var(--golden-sandstone);
+  letter-spacing: 0.1em;
+}
+
+/* ========================= Settings tile ========================= */
+
+.closet-setting {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+  padding: 12px 0;
+  border-bottom: 1px dashed var(--silken-dune);
+}
+
+.closet-setting h4 {
+  margin: 0 0 2px;
+  font-size: 0.92rem;
+  color: var(--dark-text);
+}
+
+.closet-setting p {
+  margin: 0;
+  font-size: 0.75rem;
+  color: var(--dark-text);
+  opacity: 0.65;
+}
+
+.closet-lang-btn {
+  padding: 8px 18px;
+}
+
+.closet-switch {
+  position: relative;
+  display: inline-block;
+  flex: 0 0 auto;
+  width: 48px;
+  height: 26px;
+  cursor: pointer;
+}
+
+.closet-switch input {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  opacity: 0;
+  cursor: pointer;
+}
+
+.closet-slider {
+  position: absolute;
+  inset: 0;
+  border-radius: 999px;
+  background: var(--silken-dune);
+  transition: background 0.3s ease;
+}
+
+.closet-slider::before {
+  content: "";
+  position: absolute;
+  top: 3px;
+  inset-inline-start: 3px;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: #fff;
+  box-shadow: 0 2px 6px rgba(95, 81, 60, 0.35);
+  transition: transform 0.3s cubic-bezier(0.34, 1.3, 0.64, 1);
+}
+
+.closet-switch input:checked + .closet-slider {
+  background: var(--golden-sandstone);
+}
+
+.closet-switch input:checked + .closet-slider::before {
+  transform: translateX(-22px);
+}
+
+.closet-switch input:focus-visible + .closet-slider {
+  box-shadow: 0 0 0 3px rgba(185, 150, 104, 0.35);
+}
+
+.closet-logout-btn {
+  margin-top: 14px;
+  width: 100%;
+  padding: 10px;
+  border: 1px solid var(--silken-dune);
+  border-radius: 999px;
+  background: var(--ivory-whisper);
+  color: var(--dark-text);
+  font-size: 0.88rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background 0.25s ease, color 0.25s ease, transform 0.25s ease;
+}
+
+.closet-logout-btn:hover {
+  background: var(--golden-sandstone);
+  color: #fff;
+  transform: translateY(-2px);
+}
+
+/* ========================= My Favorites — magazine ========================= */
+
+.closet-magazine {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  grid-auto-flow: dense;
+  gap: 18px;
+}
+
+.closet-fav {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  background: var(--white);
+  border: 1px solid var(--silken-dune);
+  border-radius: 22px;
+  box-shadow: var(--closet-shadow);
+  transition: transform 0.28s ease, box-shadow 0.28s ease;
+  animation: closetFadeUp 0.45s ease both;
+}
+
+.closet-fav:hover {
+  transform: translateY(-5px);
+  box-shadow: var(--closet-shadow-hover);
+}
+
+.closet-magazine .closet-fav:nth-child(2) {
+  animation-delay: 0.08s;
+}
+
+.closet-magazine .closet-fav:nth-child(3) {
+  animation-delay: 0.16s;
+}
+
+.closet-magazine .closet-fav:nth-child(n + 4) {
+  animation-delay: 0.24s;
+}
+
+.closet-fav.is-removing {
+  animation: closetFadeOut 0.38s ease forwards;
+  animation-delay: 0s;
+  pointer-events: none;
+}
+
+.closet-fav.is-new {
+  box-shadow: 0 0 0 2px var(--amber-tresses), var(--closet-shadow);
+}
+
+.closet-fav-photo {
+  position: relative;
+  flex: 1 1 auto;
+  min-height: 210px;
+}
+
+.closet-fav-photo img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.4s ease;
+}
+
+.closet-fav:hover .closet-fav-photo img {
+  transform: scale(1.05);
+}
+
+.closet-fav-gradient {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgba(43, 33, 18, 0.55), transparent 45%);
+  pointer-events: none;
+}
+
+.closet-fav-index {
+  position: absolute;
+  bottom: 12px;
+  inset-inline-start: 14px;
+  font-family: var(--closet-serif);
+  font-size: 0.95rem;
+  letter-spacing: 0.12em;
+  color: #fff;
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.45);
+}
+
+.closet-fav-caption {
+  display: grid;
+  gap: 7px;
+  padding: 16px 18px 18px;
+}
+
+.closet-fav-caption h3 {
+  margin: 0;
+  font-size: 1.15rem;
+  font-weight: 800;
+  color: var(--dark-text);
+}
+
+.closet-fav-location {
+  margin: 0;
+  font-size: 0.75rem;
+  line-height: 1.5;
+  color: var(--dark-text);
+  opacity: 0.65;
+  display: -webkit-box;
+  
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.closet-fav-meta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px 10px;
+  font-size: 0.72rem;
+}
+
+.closet-fav-rating {
+  padding: 3px 10px;
+  border-radius: 999px;
+  background: var(--champagne-veil);
+  color: var(--golden-sandstone);
+  font-weight: 800;
+}
+
+.closet-fav-services {
+  color: var(--dark-text);
+  opacity: 0.7;
+}
+
+.closet-fav-hours {
+  margin: 0;
+  font-size: 0.7rem;
+  color: var(--dark-text);
+  opacity: 0.55;
+}
+
+.closet-view-btn {
+  justify-self: start;
+  margin-top: 6px;
+  padding: 8px 22px;
+  border-radius: 999px;
+  background: var(--champagne-veil);
+  color: var(--dark-text);
+  font-size: 0.8rem;
+  font-weight: 800;
+  transition: background 0.25s ease, color 0.25s ease, transform 0.25s ease,
+    box-shadow 0.25s ease;
+}
+
+.closet-view-btn:hover {
+  background: var(--golden-sandstone);
+  color: #fff;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 18px rgba(138, 114, 76, 0.28);
+}
+
+/* ========================= Heart ========================= */
+
+.closet-heart {
+  position: absolute;
+  top: 12px;
+  inset-inline-end: 12px;
+  z-index: 2;
+  width: 40px;
+  height: 40px;
+  display: grid;
+  place-items: center;
+  border: none;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.9);
+  backdrop-filter: blur(4px);
+  box-shadow: 0 4px 12px rgba(43, 33, 18, 0.25);
+  cursor: pointer;
+  transition: transform 0.25s ease;
+}
+
+.closet-heart:hover {
+  transform: scale(1.12);
+}
+
+.closet-heart svg {
+  width: 20px;
+  height: 20px;
+}
+
+.closet-heart path {
+  fill: none;
+  stroke: var(--golden-sandstone);
+  stroke-width: 2;
+  stroke-linejoin: round;
+  transition: fill 0.25s ease;
+}
+
+.closet-heart.is-filled path {
+  fill: var(--amber-tresses);
+}
+
+.closet-heart.is-filled {
+  animation: closetHeartPop 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+/* ========================= Favorites rail — add to closet ========================= */
+
+.closet-rail-wrap {
+  margin-top: 22px;
+}
+
+.closet-rail-title {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 0 0 12px;
+  font-size: 0.85rem;
+  font-weight: 800;
+  color: var(--dark-text);
+}
+
+.closet-rail-title span {
+  padding: 2px 10px;
+  border-radius: 999px;
+  background: var(--champagne-veil);
+  color: var(--golden-sandstone);
+  font-family: var(--closet-serif);
+  font-size: 0.8rem;
+}
+
+.closet-rail {
+  display: grid;
+  grid-auto-flow: column;
+  grid-auto-columns: 150px;
+  gap: 12px;
+  overflow-x: auto;
+  padding-bottom: 8px;
+  scrollbar-width: thin;
+  scrollbar-color: var(--silken-dune) transparent;
+}
+
+.closet-rail::-webkit-scrollbar {
+  height: 6px;
+}
+
+.closet-rail::-webkit-scrollbar-thumb {
+  background: var(--silken-dune);
+  border-radius: 999px;
+}
+
+.closet-rail-item {
+  position: relative;
+  overflow: hidden;
+  border: 1px solid var(--silken-dune);
+  border-radius: 16px;
+  background: var(--white);
+  box-shadow: var(--closet-shadow);
+  transition: transform 0.25s ease, box-shadow 0.25s ease, opacity 0.3s ease;
+  animation: closetFadeUp 0.35s ease both;
+}
+
+.closet-rail-item:hover {
+  transform: translateY(-3px);
+  box-shadow: var(--closet-shadow-hover);
+}
+
+.closet-rail-item img {
+  display: block;
+  width: 100%;
+  aspect-ratio: 4 / 5;
+  object-fit: cover;
+}
+
+.closet-rail-item .closet-heart {
+  top: 8px;
+  inset-inline-end: 8px;
+  width: 32px;
+  height: 32px;
+}
+
+.closet-rail-item .closet-heart svg {
+  width: 16px;
+  height: 16px;
+}
+
+.closet-rail-name {
+  display: block;
+  padding: 8px 10px;
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: var(--dark-text);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.closet-rail-item.is-added {
+  opacity: 0;
+  transform: scale(0.85);
+}
+
+/* ========================= Empty states ========================= */
+
+.closet-empty {
+  display: grid;
+  place-items: center;
+  gap: 8px;
+  padding: 46px 20px;
+  background: var(--white);
+  border: 1px dashed var(--silken-dune);
+  border-radius: var(--closet-card-radius);
+  color: var(--dark-text);
+  animation: closetFadeUp 0.45s ease both;
+}
+
+.closet-empty span {
+  font-size: 2rem;
+  color: var(--golden-sandstone);
+}
+
+.closet-empty p {
+  margin: 0;
+  font-size: 0.9rem;
+  opacity: 0.7;
+}
+
+.closet-empty-compact {
+  padding: 30px 16px;
+}
+
+/* ========================= My Appointments ========================= */
+
+.closet-appts {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 12px;
+}
+
+.closet-appt {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 14px 16px;
+  background: var(--ivory-whisper);
+  border: 1px solid var(--silken-dune);
+  border-radius: 16px;
+  animation: closetFadeUp 0.35s ease both;
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.closet-appt:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 18px rgba(95, 81, 60, 0.1);
+}
+
+.closet-appt.is-removing {
+  animation: closetFadeOut 0.32s ease forwards;
+  pointer-events: none;
+}
+
+.closet-appt-date {
+  flex: 0 0 auto;
+  width: 56px;
+  display: grid;
+  place-items: center;
+  padding: 8px 4px;
+  border: 1px solid var(--silken-dune);
+  border-radius: 14px;
+  background: var(--white);
+}
+
+.closet-appt-date strong {
+  font-family: var(--closet-serif);
+  font-size: 1.25rem;
+  color: var(--golden-sandstone);
+  line-height: 1.1;
+}
+
+.closet-appt-date span {
+  font-size: 0.62rem;
+  color: var(--dark-text);
+  opacity: 0.7;
+}
+
+.closet-appt-info {
+  flex: 1 1 auto;
+  min-width: 0;
+  display: grid;
+  gap: 3px;
+}
+
+.closet-appt-info strong {
+  font-size: 0.95rem;
+  color: var(--dark-text);
+}
+
+.closet-appt-info span {
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: var(--golden-sandstone);
+}
+
+.closet-appt-info small {
+  font-size: 0.72rem;
+  color: var(--dark-text);
+  opacity: 0.6;
+}
+
+.closet-appt-cancel {
+  flex: 0 0 auto;
+  padding: 7px 16px;
+  border: 1px solid var(--silken-dune);
+  border-radius: 999px;
+  background: var(--white);
+  color: var(--dark-text);
+  font-size: 0.75rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background 0.25s ease, color 0.25s ease, transform 0.25s ease;
+}
+
+.closet-appt-cancel:hover {
+  background: var(--golden-sandstone);
+  color: #fff;
+  transform: translateY(-2px);
+}
+
+.closet-check {
+  position: absolute;
+  top: -10px;
+  inset-inline-end: -10px;
+  width: 26px;
+  height: 26px;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  border: 2px solid #fff;
+  background: var(--golden-sandstone);
+  color: #fff;
+  font-size: 0.8rem;
+  font-weight: 900;
+  opacity: 0;
+  transform: scale(0.3);
+  transition: opacity 0.2s ease, transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.closet-check.is-visible {
+  opacity: 1;
+  transform: scale(1);
+}
+
+/* ========================= Keyframes ========================= */
+
+@keyframes closetFadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes closetFadeOut {
+  to {
+    opacity: 0;
+    transform: scale(0.94) translateY(8px);
+  }
+}
+
+@keyframes closetAvatarPop {
+  from {
+    opacity: 0;
+    transform: scale(0.7);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes closetShine {
+  0% {
+    transform: translateX(-160%);
+  }
+  55%,
+  100% {
+    transform: translateX(160%);
+  }
+}
+
+@keyframes closetHeartPop {
+  0% {
+    transform: scale(0.6);
+  }
+  60% {
+    transform: scale(1.25);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+/* ========================= Style tags + Beauty Collection ========================= */
+
+.closet-style-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px 18px;
+  margin: -6px 0 28px;
+}
+
+.closet-style-tag {
+  position: relative;
+  padding: 4px 0 8px;
+  border: 0;
+  background: none;
+  color: var(--dark-text);
+  font-family: var(--closet-serif);
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  cursor: pointer;
+  opacity: 0.55;
+}
+
+.closet-style-tag::after {
+  content: "";
+  position: absolute;
+  right: 0;
+  bottom: 2px;
+  width: 100%;
+  height: 1px;
+  background: var(--golden-sandstone);
+  transform: scaleX(0);
+  transform-origin: right center;
+  transition: transform 0.35s ease;
+}
+
+.closet-style-tag:hover,
+.closet-style-tag.is-active {
+  opacity: 1;
+  color: var(--golden-sandstone);
+}
+
+.closet-style-tag:hover::after,
+.closet-style-tag.is-active::after {
+  transform: scaleX(1);
+}
+
+.closet-collection {
+  margin-bottom: 28px;
+}
+
+.closet-collection-kicker {
+  margin: 0 0 12px;
+  font-family: var(--closet-serif);
+  font-size: 0.72rem;
+  letter-spacing: 0.22em;
+  color: var(--golden-sandstone);
+}
+
+.closet-collection-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+}
+
+.closet-look {
+  position: relative;
+  overflow: hidden;
+  min-height: 160px;
+  padding: 0;
+  border: 0;
+  border-radius: 4px;
+  cursor: pointer;
+  text-align: start;
+  animation: closetFadeUp 0.5s ease both;
+}
+
+.closet-look:nth-child(2) { animation-delay: 0.08s; }
+.closet-look:nth-child(3) { animation-delay: 0.16s; }
+
+.closet-look img {
+  width: 100%;
+  height: 180px;
+  object-fit: cover;
+  display: block;
+  filter: grayscale(18%);
+  transition: transform 0.4s ease, filter 0.4s ease;
+}
+
+.closet-look:hover img {
+  transform: scale(1.06);
+  filter: grayscale(0%);
+}
+
+.closet-look-veil {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgba(43, 33, 18, 0.72), transparent 55%);
+}
+
+.closet-look-copy {
+  position: absolute;
+  inset: auto 12px 12px;
+  display: grid;
+  gap: 2px;
+  color: #fff;
+}
+
+.closet-look-copy small {
+  font-family: var(--closet-serif);
+  font-size: 0.62rem;
+  letter-spacing: 0.16em;
+  opacity: 0.8;
+}
+
+.closet-look-copy strong {
+  font-size: 0.92rem;
+}
+
+.closet-rail-empty {
+  margin: 18px 0 0;
+  font-size: 0.85rem;
+  color: var(--dark-text);
+  opacity: 0.65;
+}
+
+/* ========================= Responsive ========================= */
+
+@media (min-width: 640px) {
+  .closet-magazine .closet-fav:nth-child(4n + 2) {
+    grid-column: span 2;
+  }
+
+  .closet-magazine .closet-fav:nth-child(4n + 2) .closet-fav-photo {
+    min-height: 240px;
+  }
+
+  .closet-magazine .closet-fav:nth-child(4n + 3) .closet-fav-photo {
+    min-height: 260px;
+  }
+}
+
+@media (max-width: 1024px) {
+  .closet-stats {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .closet-bento-style {
+    grid-template-columns: 1fr 1fr;
+    grid-template-areas:
+      "info info"
+      "style settings";
+  }
+}
+
+@media (max-width: 900px) {
+  .closet-bento-appts {
+    grid-template-columns: 1fr;
+  }
+
+  .closet-collection-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .closet-look img {
+    height: 150px;
+  }
+}
+
+@media (max-width: 780px) {
+  .closet-hero-topline,
+  .closet-hero-title {
+    padding-inline-start: 0;
+  }
+
+  .closet-hero-since {
+    display: none;
+  }
+
+  .closet-hero-main {
+    min-height: 0;
+    padding-top: 4px;
+  }
+
+  .closet-portrait-cluster {
+    position: relative;
+    top: auto;
+    inset-inline-start: 0;
+    width: 148px;
+    margin: 12px 0 8px;
+  }
+
+  .closet-name-frame {
+    margin-inline-start: 0;
+  }
+
+  .closet-hero:hover .closet-hero-name {
+    transform: none;
+  }
+
+  .closet-hero-side {
+    display: none;
+  }
+
+  .closet-hero-edit {
+    opacity: 1;
+    transform: none;
+  }
+
+  .closet-section-heading {
+    flex-wrap: wrap;
+  }
+
+  .closet-bento-style {
+    grid-template-columns: 1fr;
+    grid-template-areas:
+      "info"
+      "style"
+      "settings";
+  }
+}
+
+@media (max-width: 640px) {
+  .closet-stat {
+    padding: 10px 12px;
+  }
+
+  .closet-stat-number {
+    font-size: 1.5rem;
+  }
+
+  .closet-stat-city-name {
+    font-size: 1.15rem;
+  }
+
+  .closet-info-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .closet-field-row {
+    grid-template-columns: 1fr;
+  }
+
+  .closet-appt {
+    flex-wrap: wrap;
+  }
+
+  .closet-appt-cancel {
+    margin-inline-start: auto;
+  }
+
+  .closet-passport-metrics {
+    width: 100%;
+  }
+}
+
+/* ========================= Reduced motion ========================= */
+
+@media (prefers-reduced-motion: reduce) {
+  .closet-page *,
+  .closet-page *::before,
+  .closet-page *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
