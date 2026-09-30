@@ -1,0 +1,8 @@
+# Dependencies
+node_modules/
+
+# Environment variables (never commit this file!)
+.env
+
+# Logs
+*.log
