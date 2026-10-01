@@ -26,12 +26,14 @@ app.use((req, res, next) => {
 // ── Routes ──────────────────────────────────────────────────
 const testRoute     = require('./src/routes/test.route');
 const authRoute     = require('./src/routes/auth.route');
+const adminRoute    = require('./src/routes/admin.route');
 const salonRoute    = require('./src/routes/salon.route');
 const serviceRoute  = require('./src/routes/service.route');
 const bookingRoute  = require('./src/routes/booking.route');
 
 app.use('/api', testRoute);
 app.use('/api/auth', authRoute);
+app.use('/api/admin', adminRoute);
 app.use('/api/salons', salonRoute);
 app.use('/api/services', serviceRoute);
 app.use('/api/bookings', bookingRoute);

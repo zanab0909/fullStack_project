@@ -5,10 +5,20 @@ const db = require('../config/db');
 // POST /api/auth/register
 const register = async (req, res) => {
   // 1. Extract fields from the request body
-  const { full_name, email, password, phone } = req.body;
+  const {
+    full_name,
+    email,
+    password,
+    phone,
+    role,
+    salon_name,
+    salon_address,
+  } = req.body;
+  const normalizedEmail = String(email || '').trim().toLowerCase();
+  const safeRole = String(role || 'client').trim().toLowerCase();
 
   // 2. Validate required fields
-  if (!full_name || !email || !password) {
+  if (!full_name || !normalizedEmail || !password) {
     return res.status(400).json({
       success: false,
       message: 'full_name, email, and password are required.',
@@ -17,10 +27,24 @@ const register = async (req, res) => {
 
   // 3. Validate email format
   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-  if (!emailRegex.test(email)) {
+  if (!emailRegex.test(normalizedEmail)) {
     return res.status(400).json({
       success: false,
       message: 'Please provide a valid email address.',
+    });
+  }
+
+  if (!['client', 'salon'].includes(safeRole)) {
+    return res.status(400).json({
+      success: false,
+      message: 'Choose either a client or salon account.',
+    });
+  }
+
+  if (safeRole === 'salon' && (!salon_name?.trim() || !salon_address?.trim())) {
+    return res.status(400).json({
+      success: false,
+      message: 'Salon name and address are required for salon accounts.',
     });
   }
 
@@ -36,7 +60,7 @@ const register = async (req, res) => {
     // 5. Check if the email is already registered
     const [existingUsers] = await db.query(
       'SELECT id FROM users WHERE email = ?',
-      [email]
+      [normalizedEmail]
     );
 
     if (existingUsers.length > 0) {
@@ -51,24 +75,53 @@ const register = async (req, res) => {
     const salt = await bcrypt.genSalt(10);
     const password_hash = await bcrypt.hash(password, salt);
 
-    // 7. Insert the new user into the database
-    //    role defaults to 'customer' automatically from the DB schema
-    const [result] = await db.query(
-      `INSERT INTO users (full_name, email, password_hash, phone)
-       VALUES (?, ?, ?, ?)`,
-      [full_name, email, password_hash, phone || null]
+    const connection = await db.getConnection();
+    let result;
+    let salonId = null;
+    try {
+      await connection.beginTransaction();
+      [result] = await connection.query(
+        `INSERT INTO users (full_name, email, password_hash, phone, role)
+         VALUES (?, ?, ?, ?, ?)`,
+        [full_name.trim(), normalizedEmail, password_hash, phone || null, safeRole]
+      );
+
+      if (safeRole === 'salon') {
+        const [salonResult] = await connection.query(
+          'INSERT INTO salons (name, address, phone, email) VALUES (?, ?, ?, ?)',
+          [salon_name.trim(), salon_address.trim(), phone || null, normalizedEmail]
+        );
+        salonId = salonResult.insertId;
+      }
+
+      await connection.commit();
+    } catch (error) {
+      await connection.rollback();
+      throw error;
+    } finally {
+      connection.release();
+    }
+
+    const token = jwt.sign(
+      { id: result.insertId, role: safeRole },
+      process.env.JWT_SECRET,
+      { expiresIn: process.env.JWT_EXPIRES_IN }
     );
 
     // 8. Return a success response (never return the password!)
     return res.status(201).json({
       success: true,
       message: 'Account created successfully.',
+      token,
       data: {
         id: result.insertId,
-        full_name,
-        email,
+        full_name: full_name.trim(),
+        email: normalizedEmail,
         phone: phone || null,
-        role: 'customer',
+        role: safeRole,
+        salon_id: salonId,
+        salon_name: safeRole === 'salon' ? salon_name.trim() : null,
+        salon_address: safeRole === 'salon' ? salon_address.trim() : null,
       },
     });
   } catch (error) {
@@ -120,6 +173,15 @@ const login = async (req, res) => {
       });
     }
 
+    let salonProfile = null;
+    if (user.role === 'salon') {
+      const [salons] = await db.query(
+        'SELECT id, name, address FROM salons WHERE email = ? ORDER BY id DESC LIMIT 1',
+        [user.email]
+      );
+      salonProfile = salons[0] || null;
+    }
+
     // 6. Generate a JWT token
     //    The token contains the user's id and role (payload)
     //    It is signed with JWT_SECRET and expires in 7 days
@@ -140,6 +202,9 @@ const login = async (req, res) => {
         email: user.email,
         phone: user.phone,
         role: user.role,
+        salon_id: salonProfile?.id || null,
+        salon_name: salonProfile?.name || null,
+        salon_address: salonProfile?.address || null,
       },
     });
   } catch (error) {
@@ -151,4 +216,28 @@ const login = async (req, res) => {
   }
 };
 
-module.exports = { register, login };
+const getMe = async (req, res) => {
+  try {
+    const [users] = await db.query(
+      'SELECT id, full_name, email, phone, role, created_at FROM users WHERE id = ?',
+      [req.user.id]
+    );
+
+    if (users.length === 0) {
+      return res.status(404).json({
+        success: false,
+        message: 'Account not found.',
+      });
+    }
+
+    return res.status(200).json({ success: true, data: users[0] });
+  } catch (error) {
+    console.error('Get profile error:', error.message);
+    return res.status(500).json({
+      success: false,
+      message: 'Could not load your profile.',
+    });
+  }
+};
+
+module.exports = { register, login, getMe };

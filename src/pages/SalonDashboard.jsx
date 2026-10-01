@@ -1,4 +1,5 @@
-import { Link } from "react-router-dom";
+import { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faCalendarCheck,
@@ -11,6 +12,25 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 
 function SalonDashboard() {
+  const navigate = useNavigate();
+  const [salonAccount] = useState(() => {
+    try {
+      const user = JSON.parse(localStorage.getItem("glow_user") || "null");
+      return {
+        name: user?.salon_name || user?.full_name || "Salon workspace",
+        profilePath: user?.salon_id ? `/salons/${user.salon_id}` : "/salons",
+      };
+    } catch {
+      return { name: "Salon workspace", profilePath: "/salons" };
+    }
+  });
+
+  const handleLogout = () => {
+    localStorage.removeItem("glow_token");
+    localStorage.removeItem("glow_user");
+    navigate("/login");
+  };
+
   const stats = [
     ["Today's bookings", "12", faCalendarCheck],
     ["Clients", "248", faUsers],
@@ -29,7 +49,7 @@ function SalonDashboard() {
               </div>
 
               <h1 className="mt-3 font-display text-[48px] leading-none tracking-[-0.05em] text-[#302720] sm:text-[60px]">
-                Luna Beauty Lounge
+                {salonAccount.name}
               </h1>
 
               <p className="mt-4 text-[13px] text-[#302720]/50">
@@ -37,13 +57,23 @@ function SalonDashboard() {
               </p>
             </div>
 
-            <Link
-              to="/salons"
-              className="inline-flex h-[50px] items-center justify-center gap-3 rounded-[10px] border border-[#76552f]/30 bg-[#9a7444] px-6 text-[10px] font-extrabold uppercase tracking-[0.1em] text-[#fffaf2] transition-all hover:bg-[#76552f]"
-            >
-              View public profile
-              <FontAwesomeIcon icon={faArrowRight} />
-            </Link>
+            <div className="flex items-center gap-3">
+              <button
+                type="button"
+                onClick={handleLogout}
+                className="inline-flex h-[50px] items-center justify-center rounded-[10px] border border-[#76552f]/30 bg-transparent px-5 text-[10px] font-extrabold uppercase tracking-[0.1em] text-[#76552f] transition-all hover:bg-[#f5eee4]"
+              >
+                Logout
+              </button>
+
+              <Link
+                to={salonAccount.profilePath}
+                className="inline-flex h-[50px] items-center justify-center gap-3 rounded-[10px] border border-[#76552f]/30 bg-[#9a7444] px-6 text-[10px] font-extrabold uppercase tracking-[0.1em] text-[#fffaf2] transition-all hover:bg-[#76552f]"
+              >
+                View public profile
+                <FontAwesomeIcon icon={faArrowRight} />
+              </Link>
+            </div>
           </div>
         </section>
 

@@ -1,6 +1,6 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
-import Navbar from "./components/Navbar";
+import SiteNavbar from "./components/SiteNavbar";
 import Footer from "./components/Footer";
 
 import Home from "./pages/Home";
@@ -16,12 +16,13 @@ import Notifications from "./pages/Notifications";
 import ClientDashboard from "./pages/ClientDashboard";
 import SalonDashboard from "./pages/SalonDashboard";
 import AdminDashboard from "./pages/AdminDashboard";
+import Profile from "./pages/Profile";
 
 function App() {
   return (
     <BrowserRouter>
       <div className="min-h-screen bg-[#f7f1e6]">
-        <Navbar />
+        <SiteNavbar />
 
         <Routes>
           <Route path="/" element={<Home />} />
@@ -42,6 +43,7 @@ function App() {
           <Route path="/login" element={<Login />} />
 
           <Route path="/register" element={<Register />} />
+          <Route path="/profile" element={<Profile />} />
 
           <Route
             path="/client-dashboard"

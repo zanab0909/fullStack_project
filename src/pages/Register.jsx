@@ -11,6 +11,7 @@ import {
   faEyeSlash,
   faCheck,
   faCircleExclamation,
+  faStore,
 } from "@fortawesome/free-solid-svg-icons";
 
 function Register() {
@@ -22,6 +23,10 @@ function Register() {
   const [lastName, setLastName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [accountType, setAccountType] = useState("client");
+  const [salonName, setSalonName] = useState("");
+  const [salonAddress, setSalonAddress] = useState("");
+  const [phone, setPhone] = useState("");
 
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
@@ -37,6 +42,10 @@ function Register() {
         full_name: `${firstName.trim()} ${lastName.trim()}`.trim(),
         email: email.trim().toLowerCase(),
         password,
+        role: accountType,
+        phone: phone.trim(),
+        salon_name: accountType === "salon" ? salonName.trim() : undefined,
+        salon_address: accountType === "salon" ? salonAddress.trim() : undefined,
       });
 
       if (result.token) {
@@ -47,7 +56,7 @@ function Register() {
         localStorage.setItem("glow_user", JSON.stringify(result.data));
       }
 
-      navigate("/client-dashboard");
+      navigate(accountType === "salon" ? "/salon-dashboard" : "/client-dashboard");
     } catch (error) {
       setError(error.message || "Unable to create your account.");
     } finally {
@@ -70,11 +79,42 @@ function Register() {
             </h1>
 
             <p className="mt-5 text-[14px] leading-7 text-[#302720]/50">
-              Save your favourite salons, manage bookings and keep all your
-              beauty appointments in one place.
+              {accountType === "salon"
+                ? "Create a salon owner account and bring your business onto GLOW."
+                : "Save your favourite salons, manage bookings and keep all your beauty appointments in one place."}
             </p>
 
             <form onSubmit={handleSubmit} className="mt-9 space-y-5">
+              <fieldset>
+                <legend className="mb-2 text-[10px] font-extrabold uppercase tracking-[0.12em] text-[#302720]/55">
+                  Account type
+                </legend>
+                <div className="grid grid-cols-2 gap-2 rounded-[10px] border border-[#302720]/10 bg-[#eee5d8]/55 p-1.5">
+                  {[
+                    ["client", "Client", faUser],
+                    ["salon", "Salon", faStore],
+                  ].map(([value, label, icon]) => (
+                    <button
+                      key={value}
+                      type="button"
+                      onClick={() => {
+                        setAccountType(value);
+                        setError("");
+                      }}
+                      aria-pressed={accountType === value}
+                      className={`flex h-11 items-center justify-center gap-2 rounded-[8px] text-[10px] font-extrabold uppercase tracking-[0.08em] transition-colors ${
+                        accountType === value
+                          ? "bg-[#302720] text-[#f5eee4]"
+                          : "text-[#302720]/55 hover:bg-[#dfcba9]/45"
+                      }`}
+                    >
+                      <FontAwesomeIcon icon={icon} />
+                      {label}
+                    </button>
+                  ))}
+                </div>
+              </fieldset>
+
               <div className="grid gap-5 sm:grid-cols-2">
                 <label>
                   <span className="mb-2 block text-[10px] font-extrabold uppercase tracking-[0.12em] text-[#302720]/55">
@@ -127,6 +167,37 @@ function Register() {
                 </label>
               </div>
 
+              {accountType === "salon" && (
+                <div className="space-y-5 rounded-[12px] border border-[#302720]/10 bg-[#eee5d8]/35 p-4">
+                  <label className="block">
+                    <span className="mb-2 block text-[10px] font-extrabold uppercase tracking-[0.12em] text-[#302720]/55">
+                      Salon name
+                    </span>
+                    <input
+                      required
+                      type="text"
+                      value={salonName}
+                      onChange={(event) => setSalonName(event.target.value)}
+                      placeholder="Your salon or studio name"
+                      className="h-[50px] w-full rounded-[9px] border border-[#302720]/12 bg-[#f5eee4] px-4 text-[13px] outline-none placeholder:text-[#302720]/30 focus:border-[#9a7444]"
+                    />
+                  </label>
+                  <label className="block">
+                    <span className="mb-2 block text-[10px] font-extrabold uppercase tracking-[0.12em] text-[#302720]/55">
+                      Salon address
+                    </span>
+                    <input
+                      required
+                      type="text"
+                      value={salonAddress}
+                      onChange={(event) => setSalonAddress(event.target.value)}
+                      placeholder="Street, city"
+                      className="h-[50px] w-full rounded-[9px] border border-[#302720]/12 bg-[#f5eee4] px-4 text-[13px] outline-none placeholder:text-[#302720]/30 focus:border-[#9a7444]"
+                    />
+                  </label>
+                </div>
+              )}
+
               <label className="block">
                 <span className="mb-2 block text-[10px] font-extrabold uppercase tracking-[0.12em] text-[#302720]/55">
                   Email address
@@ -147,6 +218,21 @@ function Register() {
                       setError("");
                     }}
                     placeholder="you@example.com"
+                    className="w-full bg-transparent text-[13px] outline-none placeholder:text-[#302720]/30"
+                  />
+                </div>
+              </label>
+
+              <label className="block">
+                <span className="mb-2 block text-[10px] font-extrabold uppercase tracking-[0.12em] text-[#302720]/55">
+                  Phone number
+                </span>
+                <div className="flex h-[55px] items-center gap-3 rounded-[10px] border border-[#302720]/12 bg-[#eee5d8]/55 px-4 focus-within:border-[#9a7444]">
+                  <input
+                    type="tel"
+                    value={phone}
+                    onChange={(event) => setPhone(event.target.value)}
+                    placeholder="Phone number"
                     className="w-full bg-transparent text-[13px] outline-none placeholder:text-[#302720]/30"
                   />
                 </div>

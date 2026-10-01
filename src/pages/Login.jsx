@@ -68,18 +68,20 @@ function Login() {
         password,
       });
 
+      const accountRole = result.data?.role;
+      const accountType = roles.find((role) => role.id === accountRole);
+
+      if (!accountType || accountRole !== selectedRole) {
+        const roleLabel = accountType?.label || "another account type";
+        setError(`This email belongs to a ${roleLabel} account. Select ${roleLabel} to sign in.`);
+        return;
+      }
+
       localStorage.setItem("glow_token", result.token);
       localStorage.setItem("glow_user", JSON.stringify(result.data));
 
       setError("");
-
-      const selected = roles.find((role) => role.id === selectedRole);
-
-      if (selected) {
-        navigate(selected.route);
-      } else {
-        navigate("/");
-      }
+      navigate(accountType.route);
     } catch (error) {
       setError(error.message || "Invalid email or password.");
     }

@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faCalendarCheck,
@@ -13,9 +13,16 @@ import {
 import { apiCall } from "../api";
 
 function ClientDashboard() {
+  const navigate = useNavigate();
   const [bookings, setBookings] = useState([]);
   const [loading, setLoading] = useState(true);
   const [dashboardError, setDashboardError] = useState("");
+
+  const handleLogout = () => {
+    localStorage.removeItem("glow_token");
+    localStorage.removeItem("glow_user");
+    navigate("/login");
+  };
 
   // ---------------------------------------------------------
   // LOAD CURRENT USER BOOKINGS
@@ -281,13 +288,23 @@ function ClientDashboard() {
               </p>
             </div>
 
-            <Link
-              to="/salons"
-              className="inline-flex h-[52px] items-center justify-center gap-3 rounded-[10px] border border-[#76552f]/35 bg-[#9a7444] px-6 text-[10px] font-extrabold uppercase tracking-[0.1em] text-[#fffaf2] shadow-[0_8px_25px_rgba(118,85,47,0.15)] transition-all hover:-translate-y-0.5 hover:bg-[#76552f]"
-            >
-              Explore salons
-              <FontAwesomeIcon icon={faArrowRight} />
-            </Link>
+            <div className="flex items-center gap-3">
+              <button
+                type="button"
+                onClick={handleLogout}
+                className="inline-flex h-[52px] items-center justify-center rounded-[10px] border border-[#76552f]/35 bg-transparent px-5 text-[10px] font-extrabold uppercase tracking-[0.1em] text-[#76552f] transition-all hover:bg-[#f5eee4]"
+              >
+                Logout
+              </button>
+
+              <Link
+                to="/salons"
+                className="inline-flex h-[52px] items-center justify-center gap-3 rounded-[10px] border border-[#76552f]/35 bg-[#9a7444] px-6 text-[10px] font-extrabold uppercase tracking-[0.1em] text-[#fffaf2] shadow-[0_8px_25px_rgba(118,85,47,0.15)] transition-all hover:-translate-y-0.5 hover:bg-[#76552f]"
+              >
+                Explore salons
+                <FontAwesomeIcon icon={faArrowRight} />
+              </Link>
+            </div>
           </div>
         </section>
 
